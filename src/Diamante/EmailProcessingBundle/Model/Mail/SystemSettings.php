@@ -15,6 +15,7 @@
 namespace Diamante\EmailProcessingBundle\Model\Mail;
 
 use Oro\Bundle\ConfigBundle\Config\ConfigManager;
+use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 
 class SystemSettings
 {
@@ -56,14 +57,16 @@ class SystemSettings
     /**
      * @param ConfigManager $configManager
      */
-    public function __construct(ConfigManager $configManager)
-    {
+    public function __construct(
+        ConfigManager $configManager,
+        SymmetricCrypterInterface $encryptor
+    ){
         $this->defaultBranchId = (int)$configManager->get('diamante_desk.default_branch');
         $this->serverAddress   = $configManager->get('diamante_email_processing.mailbox_server_address');
         $this->port            = $configManager->get('diamante_email_processing.mailbox_port');
         $this->sslEnabled      = (bool)$configManager->get('diamante_email_processing.mailbox_ssl');
         $this->username        = $configManager->get('diamante_email_processing.mailbox_username');
-        $this->password        = $configManager->get('diamante_email_processing.mailbox_password');
+        $this->password        = $encryptor->decryptData($configManager->get('diamante_email_processing.mailbox_password'));
         $this->deleteProcessedMessages = $configManager->get('diamante_email_processing.mailbox_delete_processed_messages');
     }
 

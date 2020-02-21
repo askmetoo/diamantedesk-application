@@ -63,6 +63,7 @@
 
         <service id="diamante.email_processing.mail_system_settings" class="%diamante.email_processing.mail_system_settings.class%">
             <argument type="service" id="oro_config.global"/>
+            <argument type="service" id="oro_security.encoder.default"/>
         </service>
 
         <service id="diamante.email_processing.abstract_message_provider" abstract="true" shared="false">
