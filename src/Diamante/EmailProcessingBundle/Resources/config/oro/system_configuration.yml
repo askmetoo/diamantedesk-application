@@ -1,5 +1,7 @@
 system_configuration:
     groups:
+        diamante_desk_channels:
+            configurator: '@diamante_email.form.configurator.email_configuration::configure'
         diamante_desk_channels_email_group:
             title: 'Email'
 

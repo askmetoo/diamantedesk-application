@@ -6,11 +6,15 @@
 
     <parameters>
         <parameter key="diamante_config_channels_help.type.class">Diamante\EmailProcessingBundle\Form\Type\HelpChannelsConfigurationType</parameter>
+        <parameter key="diamante_email_form_configurator_email_configuration.class">Diamante\EmailProcessingBundle\Form\Configurator\EmailConfigurationConfigurator</parameter>
     </parameters>
 
     <services>
         <service id="diamante_config_channels_help" class="%diamante_config_channels_help.type.class%">
             <tag name="form.type" />
+        </service>
+        <service id="diamante_email.form.configurator.email_configuration" class="%diamante_email_form_configurator_email_configuration.class%">
+            <argument type="service" id="oro_security.encoder.default"/>
         </service>
     </services>
 </container>

@@ -14,6 +14,7 @@
  */
 namespace Diamante\EmailProcessingBundle\DependencyInjection;
 
+use Oro\Bundle\ConfigBundle\Config\ConfigManager;
 use Oro\Bundle\ConfigBundle\DependencyInjection\SettingsBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -62,5 +63,16 @@ class Configuration implements ConfigurationInterface
         );
 
         return $treeBuilder;
+    }
+
+    /**
+     * @param string $name
+     * @param string $separator
+     *
+     * @return string
+     */
+    public static function getConfigKeyByName($name, $separator = ConfigManager::SECTION_MODEL_SEPARATOR)
+    {
+        return sprintf('diamante_email_processing%s%s', $separator, $name);
     }
 }
